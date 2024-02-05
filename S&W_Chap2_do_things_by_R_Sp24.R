@@ -1,14 +1,14 @@
 # this is from classs practice on 02/05/2024
-getwd()
-setwd("~") #Check the home directory for this computer (~ means home directory)
-setwd("~/EDRE6674_LDA_Sp24")
-
+# data useed are table2.2.sav, tolerance_longform.sav, and tolerance_wideform.sav
 
 
 
 #Use R Studio File -> Import Dataset and Copy/Paste
 library(haven)
-tolerance_longform <- read_sav("Chapter_2/tolerance_longform.sav")
+library(psych)
+
+tolerance_longform <- read_sav("tolerance_longform.sav")
+
 View(tolerance_longform)
 dim(tolerance_longform)
 colnames(tolerance_longform)

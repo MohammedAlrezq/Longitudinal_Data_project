@@ -19,12 +19,14 @@ tolerance_wideform <- read_sav("tolerance_wideform.sav")# to read this file, hav
 #View(tolerance_wideform)
 head(tolerance_wideform)
 
+## The below used pivot_long to change daat to longer format
 # Change to long form using pivot_longer() function ####
 ## %>% is the pipe operator in tidyverse 
-tolerance_longform <-
-  tolerance_wideform %>% 
-  pivot_longer(cols = tol11:tol15, names_to = "age",  names_prefix = "tol", values_to = "tolerance") %>% 
+tolerance_longform <- tolerance_wideform  |>  
+  pivot_longer(cols = tol11:tol15, names_to = "age",  names_prefix = "tol", values_to = "tolerance")|> 
   mutate(Time = as.numeric(age) - 11) 
+# comment: 
+# 1 - names_prefix is to remove "tol" next to age number in orginal data
 
 ## Now we can create many different kind of graphs using ggplot ####
 # Use ggplot() to create pretty figures
@@ -40,7 +42,7 @@ ggplot(data=tolerance_longform, aes(age, tolerance, group = id)) +
 ## Create a side-by-side plot using facet_wrap by gender
 ## Use facet_wrap
 ggplot(tolerance_longform, aes(age, tolerance, group = id)) +
-  facet_wrap (~male) +
+  facet_wrap (~male) + # facet make two plots 
   geom_point(size = 3) +
   #geom_line()
   geom_smooth(method = "lm", se = FALSE, size = 0.3) +
