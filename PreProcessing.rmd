@@ -1,0 +1,21 @@
+---
+title: "PreProcessing Analysis"
+author: "Mohammed Alrezq"
+date: "2024-02-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(haven)
+```
+
+## R Markdown
+
+```{r}
+data <- read_spss("SPDLC_Wave_3_Data.sav")
+```
+
