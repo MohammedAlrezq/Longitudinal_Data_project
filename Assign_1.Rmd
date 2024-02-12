@@ -1,0 +1,94 @@
+---
+title: "Assig#1"
+author: "Mohammed Alrezq"
+date: "2024-02-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Use R Studio File -> Import Dataset and Copy/Paste
+library(haven)
+library(psych)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+wide <- read_sav("tolerance_wideform.sav")
+
+long <- read_sav("tolerance_longform.sav")
+```
+
+```{r}
+# Figure in Slide 14 (Wide, Long)
+ggplot(long, aes(x=as.factor(age), y=TOL)) +
+  geom_boxplot() +
+  labs(x="age", y="Tolerance to deviance")
+
+
+
+# Assuming your data is in a variable called 'data'
+data_long <- pivot_longer(wide, cols = starts_with("tol"), 
+                          names_to = "wavies", values_to = "Value")
+
+ggplot(data_long, aes(x = wavies, y = Value)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "", y = "") # Modify axis labels as needed
+```
+
+
+```{r}
+#  Left table in Slide 16 (Wide, Long)
+describe(wide)
+describe(long)
+```
+
+```{r}
+# Right table in Slide 16 (Wide only)
+names(wide)
+wide_cor <- wide |> 
+  select(2:6)
+cor(wide_cor, method = "pearson")
+```
+
+```{r}
+#Figure in Slide 17 (Wide, Long)
+str(wide)
+
+# Assuming your data is stored in a variable named 'data'
+# Convert the 'male' column to a factor with labels for plotting
+wide$male <- factor(wide$male, labels = c("Female", "Male"))
+
+# Reshape the data to long format
+data_long <- wide  |> 
+  select(-id, -exposure)  |> 
+  pivot_longer(cols = starts_with("tol"), names_to = "Treatment", values_to = "Value")
+
+# Create the boxplot
+ggplot(data_long, aes(x = male, y = Value, fill = Treatment)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "MALE", y = "", fill = "") # Modify labels as needed
+
+######################
+
+
+```
+
+```{r}
+#•	Table in Slide 18 (Wide, Long)
+str(wide)
+
+library(dplyr)
+library(psych)
+
+
+
+```
+
